@@ -4,13 +4,14 @@ const mongoose = require("mongoose");
 // Creating a server instance
 const app = express();
 const PORT = process.env.PORT || 3000;
+const uri = process.env.MONGODB_URI;
 
 // Telling the server to accept any incoming data in JSON format only
 app.use(express.json());
 
 // Connecting to MongoDB database
 mongoose
-   .connect(process.env.MONGODB_URI || "mongodb://localhost:27017/post", {
+   .connect(uri || "mongodb://localhost:27017/post", {
       useNewUrlParser: true,
       useUnifiedTopology: true,
    })
