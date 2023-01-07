@@ -1,5 +1,5 @@
 const express = require("express");
-const mongodb = require("mongodb");
+const mongoose = require("mongoose");
 
 // Creating a server instance
 const app = express();
@@ -25,7 +25,7 @@ app.get("/", (req, res) => {
 app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
 
 // Importing the Post schema
-const Post = require("./models/Post.js");
+const Post = require("./models/post");
 
 // retrieves all of the posts in the database
 app.get("/posts", function (req, res) {
@@ -39,6 +39,51 @@ app.get("/posts", function (req, res) {
       }
       // Else return posts
       res.status(200).json({ posts: posts });
+   });
+});
+
+// adds a new post to the database
+app.post("/posts", function (req, res) {
+   // Destrucutring i.e. extracting the data from req.body
+   const {
+      id,
+      one,
+      two,
+      four,
+      s_hurdles,
+      l_hurdles,
+      o_relay,
+      f_relay,
+      eight,
+      sixteen,
+      thirty_two,
+   } = req.body;
+   // Creating a new Post object
+   const post = new Post({
+      id: id,
+      one: one,
+      two: two,
+      four: four,
+      s_hurdles: s_hurdles,
+      l_hurdles: l_hurdles,
+      o_relay: o_relay,
+      f_relay: f_relay,
+      eight: eight,
+      sixteen: sixteen,
+      thirty_two: thirty_two,
+   });
+   /*  Saving the new post object into the database. This
+        returns the newly saved mongodb document.
+    */
+   post.save(function (err, newPost) {
+      if (err) {
+         /*  If any error occurs while saving the document,
+                return the error message
+            */
+         return res.status(500).json({ error: err.message });
+      }
+      // Else return message 'Post saved'
+      res.status(200).json({ msg: "Post saved" });
    });
 });
 
@@ -58,6 +103,47 @@ app.get("/posts/:postID", function (req, res) {
       if (post == null) return res.status(200).json({ msg: "No post found" });
       res.status(200).json(post);
    });
+});
+
+// updates post details (marks needed for a point value)
+app.put("/posts/:postID", function (req, res) {
+   // Extracting postID from URL
+   const postID = req.params.postID;
+   const {
+      one,
+      two,
+      four,
+      s_hurdles,
+      l_hurdles,
+      o_relay,
+      f_relay,
+      eight,
+      sixteen,
+      thirty_two,
+   } = req.body;
+   Post.findOneAndUpdate(
+      { id: postID },
+      { one: one },
+      { two: two },
+      { four: four },
+      { s_hurdles: s_hurdles },
+      { l_hurdles: l_hurdles },
+      { o_relay: o_relay },
+      { f_relay: f_relay },
+      { eight: eight },
+      { sixteen: sixteen },
+      { thirty_two: thirty_two },
+      function (err, post) {
+         if (err) {
+            /* If any error occurs getting the document, then
+               return the error message
+            */
+            return res.status(500).json({ error: err.message });
+         }
+         // Else return msg "Marks updated"
+         res.status(200).json({ msg: "Marks updated" });
+      }
+   );
 });
 
 // deletes selected post from database
