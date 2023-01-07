@@ -24,9 +24,6 @@ app.get("/", (req, res) => {
 
 app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
 
-// Importing the Post schema
-const Post = require("./models/Post");
-
 // retrieves all of the posts in the database
 app.get("/posts", function (req, res) {
    // Finding all posts in the database
