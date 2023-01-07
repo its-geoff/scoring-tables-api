@@ -3,7 +3,7 @@ const mongoose = require("mongoose");
 
 // Creating a server instance
 const app = express();
-const PORT = 3000;
+const PORT = process.env.PORT || 3000;
 
 // Telling the server to accept any incoming data in JSON format only
 app.use(express.json());
