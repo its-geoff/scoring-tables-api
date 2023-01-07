@@ -1,5 +1,5 @@
 const express = require("express");
-const mongoose = require("mongoose");
+const mongodb = require("mongodb");
 
 // Creating a server instance
 const app = express();
@@ -10,8 +10,8 @@ const uri = process.env.MONGODB_URI;
 app.use(express.json());
 
 // Connecting to MongoDB database
-mongoose
-   .connect(uri || "mongodb://localhost:27017/post", {
+mongodb
+   .connect(uri || "mongodb://localhost:27017/", {
       useNewUrlParser: true,
       useUnifiedTopology: true,
    })
