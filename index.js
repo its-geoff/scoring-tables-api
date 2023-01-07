@@ -10,8 +10,8 @@ const uri = process.env.MONGODB_URI;
 app.use(express.json());
 
 // Connecting to MongoDB database
-mongodb
-   .connect(uri || "mongodb://localhost:27017/", {
+mongoose
+   .connect(uri || "mongodb://localhost:27017/post", {
       useNewUrlParser: true,
       useUnifiedTopology: true,
    })
@@ -23,6 +23,9 @@ app.get("/", (req, res) => {
 });
 
 app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
+
+// Importing the Post schema
+const Post = require("./models/post.js");
 
 // retrieves all of the posts in the database
 app.get("/posts", function (req, res) {
