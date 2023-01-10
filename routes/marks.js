@@ -2,20 +2,48 @@ const express = require("express");
 const router = express.Router();
 const Marks = require("../models/marks");
 
-// get all posts
-router.get("/", async (req, res) => {
+// get all men's marks
+router.get("/men/", async (req, res) => {
    try {
-      const marks = await Marks.find();
+      const marks = await Marks.find({ _id: { $lte: 1400 } });
       res.json(marks);
    } catch (err) {
       res.status(500).json({ message: err.message });
    }
 });
 
-// get a post through its id
+// get a men's mark through its id
 router.get("/:postID", function (req, res) {
    // Extracting postID from URL
    const postID = req.params.postID;
+   // Getting post with given ID
+   Marks.findOne({ _id: postID }, function (err, post) {
+      if (err) {
+         /* If any error occurs getting the document, then
+               return the error message
+            */
+         return res.status(500).json({ error: err.message });
+      }
+      // Else return post
+      if (post == null) return res.status(200).json({ msg: "No post found" });
+      res.status(200).json(post);
+   });
+});
+
+// get all women's marks
+router.get("/women/", async (req, res) => {
+   try {
+      const marks = await Marks.find({ _id: { $gt: 1400 } });
+      res.json(marks);
+   } catch (err) {
+      res.status(500).json({ message: err.message });
+   }
+});
+
+// get a women's mark through its id
+router.get("/:postID", function (req, res) {
+   // Extracting postID from URL
+   const postID = req.params.postID + 1400;
    // Getting post with given ID
    Marks.findOne({ _id: postID }, function (err, post) {
       if (err) {

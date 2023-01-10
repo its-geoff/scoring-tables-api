@@ -15,6 +15,7 @@ and this project adheres to [Semantic Versioning] (https://semver.org/spec/v2.0.
 ### Added
 
 -  "\_id" field to schema.
+-  Imported data for men's mid and long distance.
 
 ### Changed
 
