@@ -2,6 +2,7 @@ const mongoose = require("mongoose");
 
 // Describing the structure (schema) of the data to be stored
 const marksSchema = new mongoose.Schema({
+   _id: Number,
    "100m": Number,
    "200m": Number,
    "400m": Number,

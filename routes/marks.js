@@ -17,7 +17,7 @@ router.get("/:postID", function (req, res) {
    // Extracting postID from URL
    const postID = req.params.postID;
    // Getting post with given ID
-   Marks.findOne({ id: postID }, function (err, post) {
+   Marks.findOne({ _id: postID }, function (err, post) {
       if (err) {
          /* If any error occurs getting the document, then
                return the error message
