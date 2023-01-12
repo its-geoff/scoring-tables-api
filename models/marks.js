@@ -7,6 +7,7 @@ const marksSchema = new mongoose.Schema({
    "200m": Number,
    "400m": Number,
    "100mh": Number,
+   "110mh": Number,
    "400mh": Number,
    "4x100m": Number,
    "4x400": Number,

@@ -2,6 +2,13 @@ const express = require("express");
 const router = express.Router();
 const Marks = require("../models/marks");
 
+// direct user towards men's or women's marks
+router.get("/", async (req, res) => {
+   res.json({
+      message: "type '/men' for men's marks and '/women' for women's marks",
+   });
+});
+
 // get all men's marks
 router.get("/men/", async (req, res) => {
    try {
@@ -13,7 +20,7 @@ router.get("/men/", async (req, res) => {
 });
 
 // get a men's mark through its id
-router.get("/:postID", function (req, res) {
+router.get("/men/:postID", function (req, res) {
    // Extracting postID from URL
    const postID = req.params.postID;
    // Getting post with given ID
@@ -41,9 +48,9 @@ router.get("/women/", async (req, res) => {
 });
 
 // get a women's mark through its id
-router.get("/:postID", function (req, res) {
+router.get("/women/:postID", function (req, res) {
    // Extracting postID from URL
-   const postID = req.params.postID + 1400;
+   const postID = Number(req.params.postID) + 1400;
    // Getting post with given ID
    Marks.findOne({ _id: postID }, function (err, post) {
       if (err) {
@@ -56,69 +63,6 @@ router.get("/:postID", function (req, res) {
       if (post == null) return res.status(200).json({ msg: "No post found" });
       res.status(200).json(post);
    });
-});
-
-// creating one post
-router.post("/", async (req, res) => {
-   const marks = new Marks({
-      "100m": req.body.one,
-      "200m": req.body.two,
-      "400m": req.body.four,
-      "110mh": req.body.s_hurdles,
-      "400mh": req.body.l_hurdles,
-      "4x100m": req.body.o_relay,
-      "4x400m": req.body.f_relay,
-      "800m": req.body.eight,
-      "1600m": req.body.sixteen,
-      "3200m": req.body.thirty_two,
-   });
-
-   try {
-      const newMarks = await marks.save();
-      res.status(201).json(newMarks);
-   } catch (err) {
-      res.status(400).json({ message: err.message });
-   }
-});
-
-// updating one post
-router.patch("/:postID", getID, async (req, res) => {
-   if (req.body.one != null) {
-      res.marks.one = req.body.one;
-   }
-   if (req.body.two != null) {
-      res.marks.two = req.body.two;
-   }
-   if (req.body.four != null) {
-      res.marks.four = req.body.four;
-   }
-   if (req.body.s_hurdles != null) {
-      res.marks.s_hurdles = req.body.s_hurdles;
-   }
-   if (req.body.l_hurdles != null) {
-      res.marks.l_hurdles = req.body.l_hurdles;
-   }
-   if (req.body.o_relay != null) {
-      res.marks.o_relay = req.body.o_relay;
-   }
-   if (req.body.f_relay != null) {
-      res.marks.f_relay = req.body.f_relay;
-   }
-   if (req.body.eight != null) {
-      res.marks.eight = req.body.eight;
-   }
-   if (req.body.sixteen != null) {
-      res.marks.sixteen = req.body.sixteen;
-   }
-   if (req.body.thirty_two != null) {
-      res.marks.thirty_two = req.body.thirty_two;
-   }
-   try {
-      const updatedMarks = await res.marks.save();
-      res.json(updatedMarks);
-   } catch (err) {
-      res.status(400).json({ message: err.messsage });
-   }
 });
 
 // delete one post
