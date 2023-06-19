@@ -11,8 +11,15 @@ for certain point values.
 -  Use "git add ." to add new changes to the repository.
 -  Use "git commit" to commit your changes to the local repository.
 -  Add a commit message by pressing "a" and then typing your message out.
-   -- Use "CTRL + C" then ":qa" if you want to cancel the commit.
+   -- Use "Ctrl + C" then ":qa" if you want to cancel the commit.
+   -- Use "Esc" then ":wq" to save your message.
 -  Use "git push" to push your local changes to the git repository.
+
+## Editing a Commit Message
+
+-  Use "git commit --amend" to edit the most recent commit message.
+   -- _It is not recommended to edit any commit message besides the most recent one,
+   as this will change the history of your repository._
 
 # Start-Up Instructions
 
