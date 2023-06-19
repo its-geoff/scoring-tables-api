@@ -3,6 +3,24 @@
 This API uses the World Athletics scoring tables and pulls the marks required
 for certain point values.
 
+# Git Instructions
+
+## Pushing Code to Git
+
+-  Use "git init" to check if there's an existing repository in the current folder.
+-  Use "git add ." to add new changes to the repository.
+-  Use "git commit" to commit your changes to the local repository.
+-  Add a commit message by pressing "a" and then typing your message out.
+   -- Use "CTRL + C" then ":qa" if you want to cancel the commit.
+-  Use "git push" to push your local changes to the git repository.
+
+# Start-Up Instructions
+
+-  Click "Open App" on Heroku dashboard and verify that the API is running correctly.
+-  If running correctly, use as needed.
+-  If not running correctly, diagnose and fix the problem.
+   -- Check if the problem relates to the software or the Heroku application.
+
 # Changelog
 
 All notable changes to this project will be documented in this file.
