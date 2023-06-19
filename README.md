@@ -14,10 +14,8 @@ for certain point values.
    <<<<<<<<< Temporary merge branch 1
    -- Use "CTRL + C" then ":qa" if you want to cancel the commit.
 -  Use "git push" to push your local changes to the git repository.
-
-=========
--- Use "Ctrl + C" then ":qa" if you want to cancel the commit.
--- Use "Esc" then ":wq" to save your message.
+   -- Use "Ctrl + C" then ":qa" if you want to cancel the commit.
+   -- Use "Esc" then ":wq" to save your message.
 
 -  Use "git push" to push your local changes to the git repository.
 
