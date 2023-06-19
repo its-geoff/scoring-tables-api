@@ -11,8 +11,14 @@ for certain point values.
 -  Use "git add ." to add new changes to the repository.
 -  Use "git commit" to commit your changes to the local repository.
 -  Add a commit message by pressing "a" and then typing your message out.
-   -- Use "Ctrl + C" then ":qa" if you want to cancel the commit.
-   -- Use "Esc" then ":wq" to save your message.
+   <<<<<<<<< Temporary merge branch 1
+   -- Use "CTRL + C" then ":qa" if you want to cancel the commit.
+-  Use "git push" to push your local changes to the git repository.
+
+=========
+-- Use "Ctrl + C" then ":qa" if you want to cancel the commit.
+-- Use "Esc" then ":wq" to save your message.
+
 -  Use "git push" to push your local changes to the git repository.
 
 ## Editing a Commit Message
