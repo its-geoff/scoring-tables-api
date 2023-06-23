@@ -23,6 +23,18 @@ for certain point values.
    -  _It is not recommended to edit any commit message besides the most recent one,
       as this will change the history of your repository._
 
+## Fixing an Issue
+
+-  Create a new branch using "git checkout -b type-issue-name".
+   -  "type" is either "hotfix" or "feature" depending on the issue type.
+-  After fixing the issue, commit the changes as shown above.
+-  Push the changes to GitHub using "git push -u origin type-issue-name".
+-  Create a pull request on GitHub using the templates.
+-  Merge the branches with the option "Create a merge commit".
+-  Switch back to the main branch by using "git checkout main".
+-  Delete the issue branch from your local repository using "git branch -d type-issue-name".
+-  Use "git pull origin main" to update your local repository.
+
 # Start-Up Instructions
 
 -  Click "Open App" on Heroku dashboard and verify that the API is running correctly.
