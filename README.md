@@ -32,8 +32,8 @@ for certain point values.
 -  Create a pull request on GitHub using the templates.
 -  Merge the branches with the option "Create a merge commit".
 -  Switch back to the main branch by using "git checkout main".
--  Delete the issue branch from your local repository using "git branch -d type-issue-name".
 -  Use "git pull origin main" to update your local repository.
+-  Delete the issue branch from your local repository using "git branch -d type-issue-name".
 
 # Start-Up Instructions
 
