@@ -31,7 +31,7 @@ for certain point values.
 -  Push the changes to GitHub using "git push -u origin type-issue-name".
 -  Create a pull request on GitHub using the templates.
 -  Merge the branches with the option "Create a merge commit".
--  Switch back to the main branch by using "git checkout main".
+-  Switch back to the main branch by using "git switch".
 -  Use "git pull origin main" to update your local repository.
 -  Delete the issue branch from your local repository using "git branch -d type-issue-name".
 
