@@ -14,6 +14,12 @@ const marksSchema = new mongoose.Schema({
    "800m": Number,
    "1600m": Number,
    "3200m": Number,
+   HJ: Number,
+   PV: Number,
+   LJ: Number,
+   TJ: Number,
+   SP: Number,
+   DT: Number,
 });
 
 // Exporting the finalized schemas
