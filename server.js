@@ -1,5 +1,6 @@
 // initializing dependencies
 const express = require("express");
+const cors = require("cors");
 const app = express();
 const mongoose = require("mongoose");
 const PORT = process.env.PORT || 3000;
@@ -7,6 +8,7 @@ const uri = process.env.MONGODB_URI;
 
 // telling the server to accept any incoming data in JSON format only
 app.use(express.json());
+app.use(cors());
 
 // connecting to MongoDB database
 mongoose
