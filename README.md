@@ -294,4 +294,6 @@ Distributed under the ISC License. See `LICENSE.txt` for more info.
 
 Questions or feedback? Reach out via GitHub or open an issue on the repo.
 
+Geoffrey Agustin, [its-geoff](https://github.com/its-geoff)
+
 Project Link: [https://github.com/its-geoff/scoring-tables-api](https://github.com/its-geoff/scoring-tables-api)
