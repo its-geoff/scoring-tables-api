@@ -1,126 +1,297 @@
 # Scoring Tables API
 
-This API uses the World Athletics scoring tables and pulls the marks required
-for certain point values.
+A REST API built with Node.js, Express, and MongoDB that serves World Athletics scoring table data. Given a point value (by ID), you can look up the corresponding performance marks required across a range of track and field events — for both men and women.
 
-# Git Instructions
+**Live on RapidAPI:** [scoring-tables-api](https://rapidapi.com/geoffreyyyagustin/api/scoring-tables-api) — no setup required, just subscribe and start making requests.
 
-## Pushing Code to Git
+---
 
--  Use "git init" to check if there's an existing repository in the current folder.
--  Use "git add ." to add new changes to the repository.
--  Use "git commit" to commit your changes to the local repository.
--  Add a commit message by pressing "a" and then typing your message out.
-   -  Use "CTRL + C" then ":qa" if you want to cancel the commit.
--  Use "git push" to push your local changes to the git repository.
-   -  Use "Ctrl + C" then ":qa" if you want to cancel the commit.
-   -  Use "Esc" then ":wq" to save your message.
--  Use "git push" to push your local changes to the git repository.
+## About the Project
 
-## Editing a Commit Message
+If you've ever competed in track and field, you've probably seen those giant scoring tables that tell you "hey, if you run X time in the 400m, that's worth Y points." This API makes that data programmatically accessible. It pulls marks from a MongoDB database and exposes them through a simple REST interface, which makes it easy to integrate into apps, calculators, or whatever else you're building.
 
--  Use "git commit --amend" to edit the most recent commit message.
-   -  _It is not recommended to edit any commit message besides the most recent one,
-      as this will change the history of your repository._
+Currently supports the following events:
 
-## Fixing an Issue
+**Track:** 100m, 200m, 400m, 800m, 1600m, 3200m, 100mH (women), 110mH (men), 400mH, 4x100m, 4x400m
 
--  Create a new branch using "git checkout -b type-issue-name".
-   -  "type" is either "hotfix" or "feature" depending on the issue type.
--  After fixing the issue, commit the changes as shown above.
--  Push the changes to GitHub using "git push -u origin type-issue-name".
--  Create a pull request on GitHub using the templates.
--  Merge the branches with the option "Create a merge commit".
--  Switch back to the main branch by using "git switch".
--  Use "git pull origin main" to update your local repository.
--  Delete the issue branch from your local repository using "git branch -d type-issue-name".
+**Field:** High Jump (HJ), Pole Vault (PV), Long Jump (LJ), Triple Jump (TJ), Shot Put (SP), Discus Throw (DT)
 
-# Start-Up Instructions
+---
 
--  Click "Open App" on Heroku dashboard and verify that the API is running correctly.
--  If running correctly, use as needed.
--  If not running correctly, diagnose and fix the problem.
-   -- Check if the problem relates to the software or the Heroku application.
+## Built With
 
-# Changelog
+- [Node.js](https://nodejs.org/)
+- [Express](https://expressjs.com/)
+- [Mongoose](https://mongoosejs.com/)
+- [MongoDB](https://www.mongodb.com/)
+- [CORS](https://www.npmjs.com/package/cors)
 
-All notable changes to this project will be documented in this file.
+---
 
-The format is based on [Keep a Changelog] (https://keepachangelog.com/en/1.0.0/),
-and this project adheres to [Semantic Versioning] (https://semver.org/spec/v2.0.0.html).
+## Getting Started
 
-## [1.1.3] - 2023-12-10
+Here's how to get a local copy up and running. Shouldn't take too long.
 
-### Changed
-- Capitalized hurdle marks for consistency.
+### Prerequisites
 
-## [1.1.2] - 2023-12-04
+You'll need Node.js and npm installed. You'll also need a MongoDB instance — either local or hosted (e.g., MongoDB Atlas).
 
-### Added
+```sh
+npm install npm@latest -g
+```
 
-- Requirement for CORS middleware.
+### Installation
 
-## [1.1.1] - 2023-12-02
+1. Clone the repo
 
-### Changed
+```sh
+git clone https://github.com/github_username/scoring-tables-api.git
+```
 
-- Capitalized event abbreviations for consistency.
+2. Navigate into the project directory
 
-## [1.1.0] - 2023-06-27
+```sh
+cd scoring-tables-api
+```
 
-### Added
+3. Install dependencies
 
--  Functionality for jump and throwing events.
+```sh
+npm install
+```
 
-## [1.0.0] - 2023-06-18
+4. Set up your environment variable for MongoDB. Either export it directly or create a `.env` file:
 
-### Added
+```sh
+export MONGODB_URI="your_mongodb_connection_string_here"
+```
 
--  README file fully updated with GitHub and Start-Up information.
--  Full-time deployment through Heroku.
+5. Start the server
 
-## [0.1.2] - 2023-01-11
+```sh
+npm start
+```
 
-### Added
+By default, the server runs on **port 3000**. You should see `Connected to MongoDB` and `Server running on port 3000` in your console if everything worked.
 
--  GET "/marks" command directs user to select men's or women's marks.
--  "100mh" field to schema for women's short hurdles.
--  Imported data for all women's track events.
+---
 
-### Changed
+## Usage
 
--  "110mH" and "400mH" to "110mh" and "400mh" in data to match case with Mongoose schema.
+All endpoints are prefixed with `/marks`. You can test these out with a browser, curl, or Postman.
 
-### Fixed
+### Base Route
 
--  Fixed route to all women's marks.
--  Fixed route to women's marks with ID.
+```
+GET /
+```
 
-### Removed
+Returns a welcome message confirming the API is live.
 
--  Unnecessary POST and PATCH functions.
+---
 
-## [0.1.1] - 2023-01-09
+### Marks Routes
 
-### Added
+```
+GET /marks
+```
 
--  "\_id" field to schema.
--  Imported data for men's mid and long distance.
+Directs you to use `/marks/men` or `/marks/women`.
 
-### Changed
+---
 
--  Data now includes "\_id" values to replace "id" values.
--  Instances of "id" in code were replaced with "\_id" to reflect changes.
+```
+GET /marks/men
+```
 
-### Fixed
+Returns all men's scoring table entries (IDs 1–1400, corresponding to 1–1400 points).
 
--  Fixed GET post by ID to work correctly instead of displaying data with ID "1".
+---
 
-## [0.1.0] - 2023-01-08
+```
+GET /marks/men/:id
+```
 
-### Added
+Returns the men's marks for a specific point value.
 
--  The Scoring Tables API server with basic GET, POST, PATCH, and DELETE commands.
--  A Mongoose schema featuring 10 track events.
--  A fully functional database using MongoDB.
--  Imported data for men's sprints, hurdles, and relays.
+**Example:**
+
+```
+GET /marks/men/800
+```
+
+Returns the performance marks worth 800 points in each men's event.
+
+---
+
+```
+GET /marks/women
+```
+
+Returns all women's scoring table entries.
+
+---
+
+```
+GET /marks/women/:id
+```
+
+Returns the women's marks for a specific point value. Note: the women's IDs are offset internally (stored as `id + 1400` in the database), but you just pass in the raw point value — the API handles the offset for you.
+
+**Example:**
+
+```
+GET /marks/women/950
+```
+
+---
+
+### Example Response
+
+```json
+{
+    "_id": 800,
+    "100m": 10.75,
+    "200m": 21.76,
+    "400m": 47.8,
+    "800m": 106.95,
+    "1600m": 237.3,
+    "3200m": 512.6,
+    "110mH": 14.36,
+    "400mH": 52.1,
+    "4x100m": 42.03,
+    "4x400": 188.4,
+    "HJ": 2.07,
+    "PV": 4.88,
+    "LJ": 7.33,
+    "TJ": 15.23,
+    "SP": 16.72,
+    "DT": 52.14
+}
+```
+
+_(Values are illustrative — actual data depends on what's loaded into your database.)_
+
+---
+
+## Deployment
+
+The API is publicly available on **RapidAPI**:
+
+👉 [https://rapidapi.com/geoffreyyyagustin/api/scoring-tables-api](https://rapidapi.com/geoffreyyyagustin/api/scoring-tables-api)
+
+Create a free RapidAPI account, subscribe to the API, and you'll get a key to hit all the endpoints documented above — no local setup needed.
+
+The server itself runs on **Heroku**. To check if the live instance is healthy:
+
+1. Open the app from the Heroku dashboard
+2. Navigate to the base URL; if you see the welcome message, you're good to go
+3. If something's broken, check whether it's a code issue or a Heroku/dyno issue first
+
+---
+
+## Project Structure
+
+```
+scoring-tables-api/
+├── models/
+│   └── marks.js        # Mongoose schema for scoring table entries
+├── routes/
+│   └── marks.js        # Express route handlers for /marks
+├── server.js           # Entry point — sets up Express, MongoDB, routes
+├── example.js          # Quick script to test MongoDB connection directly
+├── package.json
+└── README.md
+```
+
+---
+
+## Changelog
+
+All notable changes are documented here. Format based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
+
+### [1.1.3] – 2023-12-10
+
+- Capitalized hurdle marks for consistency
+
+### [1.1.2] – 2023-12-04
+
+- Added CORS middleware requirement
+
+### [1.1.1] – 2023-12-02
+
+- Capitalized event abbreviations for consistency
+
+### [1.1.0] – 2023-06-27
+
+- Added support for jump and throwing events
+
+### [1.0.0] – 2023-06-18
+
+- Fully updated README
+- Full-time deployment through Heroku
+
+### [0.1.2] – 2023-01-11
+
+- Added `GET /marks` redirect behavior
+- Added `100mH` field for women's short hurdles
+- Imported all women's track event data
+- Fixed women's routes
+
+### [0.1.1] – 2023-01-09
+
+- Added `_id` field to schema
+- Imported men's mid and long distance data
+- Fixed GET by ID
+
+### [0.1.0] – 2023-01-08
+
+- Initial server with GET, POST, PATCH, DELETE
+- Mongoose schema with 10 track events
+- MongoDB database setup
+- Imported men's sprints, hurdles, and relays
+
+---
+
+## Contributing
+
+Pull requests are welcome. If you want to add new events, fix a bug, or clean something up:
+
+1. Fork the project
+2. Create a feature branch (`git checkout -b feature/your-feature-name`)
+3. Commit your changes (`git commit -m 'Add some feature'`)
+4. Push to the branch (`git push origin feature/your-feature-name`)
+5. Open a Pull Request
+
+---
+
+## Git Workflow Notes
+
+Quick reference for working with this repo:
+
+- `git add .` → stage changes
+- `git commit` → commit locally (press `a` to start typing your message in vim, `Esc` then `:wq` to save)
+- `git push` → push to remote
+
+**To fix a bug or add a feature:**
+
+1. `git checkout -b hotfix-bug-name` or `git checkout -b feature-feature-name`
+2. Make your changes and commit
+3. `git push -u origin branch-name`
+4. Open a PR on GitHub and merge with "Create a merge commit"
+5. `git switch main` → `git pull origin main`
+6. `git branch -d branch-name` to clean up locally
+
+---
+
+## License
+
+Distributed under the ISC License. See `LICENSE.txt` for more info.
+
+---
+
+## Contact
+
+Questions or feedback? Reach out via GitHub or open an issue on the repo.
+
+Project Link: [https://github.com/its-geoff/scoring-tables-api](https://github.com/its-geoff/scoring-tables-api)
